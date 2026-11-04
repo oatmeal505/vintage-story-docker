@@ -13,7 +13,6 @@ ENV WHITELIST=true
 ENV USERNAME=vintagestory
 ENV PORT=42420
 ENV SERVERNAME="Vintage Story Server"
-ENV PASSWORD=null
 
 RUN useradd ${USERNAME} -m
 

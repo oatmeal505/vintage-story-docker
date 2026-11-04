@@ -1,0 +1,28 @@
+#!/bin/bash 
+if [ -e server/server.sh]
+then
+    server/server.sh start
+
+else
+    wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
+    mkdir server && tar -C server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
+    
+    cp server.sh server/server.sh
+
+    rm vs_server_linux-x64_${VERSION}.tar.gz
+    rm server.sh
+
+    server/server.sh start
+
+    cp data/serverconfig.json tmp.$$.json
+    
+    jq '.OnlyWhitelisteddata = $VAL' --arg VAL ${WHITELIST} tmp.$$.json > tmp.$$.json
+    jq '.Port = $VAL' --arg VAL ${PORT} tmp.$$.json > tmp.$$.json
+    jq '.ServerName = $VAL' --arg VAL "${SERVERNAME}" tmp.$$.json > tmp.$$.json
+    jq '.Password = $VAL' --arg VAL ${PASSWORD} tmp.$$.json > tmp.$$.json
+
+    cp tmp.$$.json data/serverconfig.json
+
+    server/server.sh restart
+
+fi

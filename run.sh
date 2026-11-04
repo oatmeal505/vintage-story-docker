@@ -14,30 +14,26 @@ else
     rm server.sh
 
     server/server.sh start
-
+    
     server/server.sh stop
 
-    cp data/serverconfig.json tmp.$$.json
+    mv data/serverconfig.json tmp.$$.json
+
+    jq '.Port = $VAL' --arg VAL ${PORT} tmp.$$.json > tmp.$$.json
+    jq '.ServerName = $VAL' --arg VAL "${SERVERNAME}" tmp.$$.json > tmp.$$.json
+
+    mv tmp.$$.json data/serverconfig.json
+
+    server/server.sh start
 
     if [[ "$WHITELIST" == "false" ]];
 
     then
-        jq '.OnlyWhitelisteddata = $VAL' --arg VAL ${WHITELIST} tmp.$$.json > tmp.$$.json
-        jq '.WhitelistMode = $VAL' --arg VAL 1 tmp.$$.json > tmp.$$.json
-
+        server/server.sh command serverconfig whitelistmode off
         echo "whitelist disabled"
     else
-        jq '.OnlyWhitelisteddata = $VAL' --arg VAL ${WHITELIST} tmp.$$.json > tmp.$$.json
-        jq '.WhitelistMode = $VAL' --arg VAL 2 tmp.$$.json > tmp.$$.json
-
+        server/server.sh command serverconfig whitelistmode on
         echo "whitelist enabled"
     fi
-    
-    jq '.Port = $VAL' --arg VAL ${PORT} tmp.$$.json > tmp.$$.json
-    jq '.ServerName = $VAL' --arg VAL "${SERVERNAME}" tmp.$$.json > tmp.$$.json
-
-    cp tmp.$$.json data/serverconfig.json
-
-    server/server.sh start
 
 fi

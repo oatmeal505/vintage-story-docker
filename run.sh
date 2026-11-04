@@ -24,9 +24,13 @@ else
     then
         jq '.OnlyWhitelisteddata = $VAL' --arg VAL ${WHITELIST} tmp.$$.json > tmp.$$.json
         jq '.WhitelistMode = $VAL' --arg VAL 1 tmp.$$.json > tmp.$$.json
+
+        echo "whitelist disabled"
     else
         jq '.OnlyWhitelisteddata = $VAL' --arg VAL ${WHITELIST} tmp.$$.json > tmp.$$.json
         jq '.WhitelistMode = $VAL' --arg VAL 2 tmp.$$.json > tmp.$$.json
+
+        echo "whitelist enabled"
     fi
     
     jq '.Port = $VAL' --arg VAL ${PORT} tmp.$$.json > tmp.$$.json

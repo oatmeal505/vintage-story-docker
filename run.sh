@@ -3,6 +3,7 @@ if [ -e server/server.sh]
 
 then
     server/server.sh start
+    tail -f /data/Logs/server-main.log
 
 else
     wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
@@ -35,5 +36,7 @@ else
         server/server.sh command serverconfig whitelistmode on
         echo "whitelist enabled"
     fi
+
+    tail -f /data/Logs/server-main.log
 
 fi

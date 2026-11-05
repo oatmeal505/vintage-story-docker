@@ -37,6 +37,6 @@ else
         echo "whitelist enabled"
     fi
 
-    tail -f /data/Logs/server-main.log
+    tail -f data/Logs/server-main.log
 
 fi

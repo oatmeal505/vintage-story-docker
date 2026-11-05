@@ -19,7 +19,7 @@
 
 #Settings
 HISTORY=1024
-USERNAME=$USERNAME
+USERNAME=vintagestory
 VSPATH='/home/vintagestory/server'
 DATAPATH='/home/vintagestory/data'
 

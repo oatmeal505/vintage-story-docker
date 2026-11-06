@@ -19,14 +19,8 @@
 
 #Settings
 HISTORY=1024
-USERNAME=vintagestory
-VSPATH='/home/vintagestory/server'
-DATAPATH='/home/vintagestory/data'
 
 ## change the SCREENNAME (and DATAPATH) when running multiple servers on the same system
-SCREENNAME='vintagestory_server'
-SERVICE="VintagestoryServer.dll"
-OPTIONS=""
 
 
 INVOCATION="dotnet ${SERVICE} --dataPath \"${DATAPATH}\" ${OPTIONS}"
@@ -43,6 +37,7 @@ command -v dotnet >/dev/null 2>&1 && dotnet --list-runtimes | grep -q "Microsoft
 #Possibly run as user of group vintagestory
 unset GROUPNAME
 ME=$(whoami)
+echo $ME 
 if [ "${ME}" != "${USERNAME}" ] ; then
   groups "${ME}" | grep -q "${USERNAME}" && { GROUPNAME="${USERNAME}"; USERNAME="${ME}"; }
 fi
@@ -58,7 +53,6 @@ as_user() {
 }
 
 vs_version() {
-  instdir="${1}"
   if ! [ -f "${instdir}/${SERVICE}" ] ; then
     echo "Fatal! ${instdir}/${SERVICE} not found. Make sure to set a correct VSPATH and DATA in the server.sh file. Aborting." >&2
     exit 1
@@ -194,10 +188,8 @@ vs_update () {
 
 
 vs_setup() {
-  read -p "Please confirm setup of basic server environment: user ${1} path ${2:-/home/${1}/server} (y/n) " -n 1 -r ; echo
+  read -p "Please confirm setup of basic server environment: user ${1} path ${2:-/app/server} (y/n) " -n 1 -r ; echo
   if [ "${REPLY,,}" = "y" ] ; then
-    USERNAME="${1}"
-    VSPATH="${2:-/home/${1}/server}"
 	if [ "${ME}" != "${USERNAME}" ] ; then
       if ! getent passwd "${USERNAME}" > /dev/null ; then
         useradd -r -s "/bin/false" -U "${USERNAME}" >/dev/null 2>&1 || { echo "Fatal! User setup failed.  Aborting." >&2; exit 1; }

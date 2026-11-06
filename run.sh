@@ -1,29 +1,95 @@
 #!/bin/bash
 
-wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
-mkdir server && tar -C server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
-    
-cp server.sh server/server.sh
+export ME=$(whoami)
+echo $ME
 
-rm vs_server_linux-x64_${VERSION}.tar.gz
-
-server/server.sh start
-
-if [[ "$WHITELIST" == "false" ]];
-
-then
-    server/server.sh command serverconfig whitelistmode off
-    echo "whitelist disabled"
+if [ -d "${USERNAME}/data" ]; then 
+    mkdir data && touch ${USERNAME}/data/*
 else
-    server/server.sh command serverconfig whitelistmode on
-    echo "whitelist enabled"
+    touch ${USERNAME}/data/*
+    chown -R ${USERNAME}:${USERNAME} data
+fi
+if [ -d "${USERNAME}/server" ]; then 
+    mkdir server && touch ${USERNAME}/server/*
+else 
+    touch ${USERNAME}/server/*
+    chown -R ${USERNAME}:${USERNAME} server
 fi
 
-server/server.sh stop
+echo $USERNAME
 
-python3 config_manipulator.py
+sudo su - $USERNAME
+sudo su - ${USERNAME}
 
-server/server.sh start
+export VSPATH='/home/${USERNAME}}/server'
+export DATAPATH='/home/${USERNAME}}/data'
+export SaveFileLocation="/home/${USERNAME}/data/Saves/default.vcdbs"
+export instdir="/home/${USERNAME}/server"
 
-tail -f data/Logs/server-main.log
 
+cp config_manipulator.py ${USERNAME}/config_manipulator.py
+
+if [ -e "${USERNAME}/server/server.sh" ]; then
+    if [ -e "${USERNAME}/data/serverconfig.json" ]; then
+        python3 ${USERNAME}/config_manipulator.py
+
+        if [ ${UPDATE_VERSION} == "true" ]; then
+            wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
+            tar -C ${USERNAME}/server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
+
+            cp server.sh ${USERNAME}/server/server.sh
+            rm vs_server_linux-x64_${VERSION}.tar.gz
+        fi 
+    else 
+    echo "serverconfig.json not found"
+    ${USERNAME}/server/server.sh start
+    ${USERNAME}/server/server.sh stop
+
+    python3 ${USERNAME}/config_manipulator.py
+
+        if [ ${UPDATE_VERSION} == "true" ]; then
+            wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
+            tar -C ${USERNAME}/server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
+
+            cp server.sh ${USERNAME}/server/server.sh
+            rm vs_server_linux-x64_${VERSION}.tar.gz
+        fi 
+    fi
+else    
+echo "server.sh not found"
+wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
+tar -C ${USERNAME}/server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
+
+cp server.sh ${USERNAME}/server/server.sh
+rm vs_server_linux-x64_${VERSION}.tar.gz
+
+    if [ -e "${USERNAME}/data/serverconfig.json" ]; then
+        python3 ${USERNAME}/config_manipulator.py
+
+        if [ ${UPDATE_VERSION} == "true" ]; then
+            wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
+            tar -C ${USERNAME}/server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
+
+            cp server.sh ${USERNAME}/server/server.sh
+            rm vs_server_linux-x64_${VERSION}.tar.gz
+        fi 
+    else 
+    echo "serverconfig.json not found"
+        ${USERNAME}/server/server.sh start
+        ${USERNAME}/server/server.sh stop
+
+        python3 ${USERNAME}/config_manipulator.py
+
+        if [[ ${UPDATE_VERSION} == "true" ]]; then
+            wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
+            tar -C ${USERNAME}/server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
+
+            cp server.sh ${USERNAME}/server/server.sh
+            rm vs_server_linux-x64_${VERSION}.tar.gz
+        fi 
+    fi
+fi 
+
+${USERNAME}/server/server.sh start
+
+tail -f ${USERNAME}/data/Logs/server-main.log

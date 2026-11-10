@@ -26,6 +26,4 @@ chown -R ${USERNAME}:${GROUPNAME} server
 chown -R ${USERNAME}:${GROUPNAME} entrypoint.sh
 chown -R ${USERNAME}:${GROUPNAME} config_manipulator.py
 
-ls -l
-
 su -T -c "./entrypoint.sh" ${USERNAME} 

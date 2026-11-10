@@ -37,9 +37,10 @@ if [ -e "server/VintagestoryServer.dll" ]; then
 else    
 
 echo "vintage story binary not found!"
+ls -l
 wget https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VERSION}.tar.gz  
 tar -C server -xzf vs_server_linux-x64_${VERSION}.tar.gz 
-
+ls -l
 rm vs_server_linux-x64_${VERSION}.tar.gz
 
     if [ -e "data/serverconfig.json" ]; then

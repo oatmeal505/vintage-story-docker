@@ -1,5 +1,5 @@
 # 
-getent passwd ubuntu
+getent passwd ubuntu:1000
 userdel --force Ubuntu
 
 if getent passwd $GROUPNAME; then
@@ -19,13 +19,13 @@ if ! [ -d /app/data ]; then
     mkdir data
     echo "data folder created" 
 else 
-    chown -R --silent ${USERNAME}:${GROUPNAME} data
+    chown -R ${USERNAME}:${GROUPNAME} data
 fi
 if ! [ -d /app/server ]; then 
     mkdir server
     echo "server folder created" 
 else 
-    chown -R --silent ${USERNAME}:${GROUPNAME} server
+    chown -R ${USERNAME}:${GROUPNAME} server
 fi
 
-su -p - ${USERNAME} "./entrypoint.sh"
+su - ${USERNAME} "./entrypoint.sh"

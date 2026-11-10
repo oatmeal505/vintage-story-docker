@@ -1,6 +1,6 @@
 # 
 getent passwd ubuntu
-userdel --force ubuntu
+userdel --force Ubuntu
 
 if getent passwd $GROUPNAME; then
     echo "group exists"
@@ -28,4 +28,4 @@ else
     chown -R --silent ${USERNAME}:${GROUPNAME} server
 fi
 
-# su - ${USERNAME} "./entrypoint.sh"
+su - ${USERNAME} "./entrypoint.sh"

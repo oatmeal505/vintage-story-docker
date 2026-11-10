@@ -28,4 +28,4 @@ else
     chown -R --silent ${USERNAME}:${GROUPNAME} server
 fi
 
-su - ${USERNAME} "./entrypoint.sh"
+su -p - ${USERNAME} "./entrypoint.sh"

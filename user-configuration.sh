@@ -22,9 +22,9 @@ if ! [ -d /app/server ]; then
 fi
 
 chown -R ${USERNAME}:${GROUPNAME} data
-echo chown -R ${USERNAME}:${GROUPNAME} data
 chown -R ${USERNAME}:${GROUPNAME} server
-echo chown -R ${USERNAME}:${GROUPNAME} server
+chown -R ${USERNAME}:${GROUPNAME} entrypoint.sh
+chown -R ${USERNAME}:${GROUPNAME} config_manipulator.py
 
 ls -l
 

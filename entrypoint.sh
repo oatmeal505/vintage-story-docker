@@ -1,14 +1,5 @@
 #!/bin/bash
 
-if ! [ -d /app/data ]; then 
-    mkdir data
-    echo "data folder created" 
-fi
-if ! [ -d /app/server ]; then 
-    mkdir server
-    echo "server folder created" 
-fi
-
 if [ -e "server/VintagestoryServer.dll" ]; then
     if [ -e "data/serverconfig.json" ]; then
         python3 config_manipulator.py

@@ -26,4 +26,6 @@ echo chown -R ${USERNAME}:${GROUPNAME} data
 chown -R ${USERNAME}:${GROUPNAME} server
 echo chown -R ${USERNAME}:${GROUPNAME} server
 
-su -T -cs ${USERNAME} "./entrypoint.sh"
+ls -l
+
+su -T -c ${USERNAME} "./entrypoint.sh"

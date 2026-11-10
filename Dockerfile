@@ -21,8 +21,8 @@ ENV PORT=42420
 ENV UPDATE_VERSION="false"
 
 # Default user configuration
-ENV USERNAME=vintagestory
-ENV GROUPNAME=vintagestory
+ENV USERNAME=ubuntu
+ENV GROUPNAME=ubuntu
 ENV USER_ID=1001
 ENV GROUP_ID=1001
 

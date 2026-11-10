@@ -21,10 +21,10 @@ ENV PORT=42420
 ENV UPDATE_VERSION="false"
 
 # Default user configuration
-ENV USERNAME=ubuntu
-ENV GROUPNAME=ubuntu
-ENV USER_ID=1001
-ENV GROUP_ID=1001
+ENV USERNAME=vintagestoryserver
+ENV GROUPNAME=vintagestoryserver
+ENV USER_ID=1000
+ENV GROUP_ID=1000
 
 WORKDIR /app
 

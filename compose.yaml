@@ -1,15 +1,15 @@
 services:
   server:
-    image: ghcr.io/oatmeal505/vintage-story-docker:latest
+    image: test:test
     container_name: vintage-story-server
     ports:
       - "42420:42420"
     environment:
       # User configuration
-      - USERNAME=${USER} # host machines user name 
-      - USER_ID=${UID} # host machines UID
-      - GROUP_ID=${GID} # host machines GID
-      - GROUPNAME="vintagestory" # host machines group
+      - USERNAME=oatmeal # host machines user name 
+      - USER_ID=1000 # host machines UID
+      - GROUP_ID=1000 # host machines GID
+      - GROUPNAME=oatmeal # host machines group
 
       - WHITELIST=true
 
@@ -20,5 +20,5 @@ services:
       - UPDATE_CONFIRM="false"
     volumes:
       # 
-      - /host-machine/data:/app/data
-      - /host-machine/server:/app/server
+      - /home/oatmeal/Git-projects/vintage-story-docker/data:/app/data
+      - /home/oatmeal/Git-projects/vintage-story-docker/server:/app/server

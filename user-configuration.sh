@@ -1,16 +1,7 @@
 # 
-if getent passwd $GROUPNAME; then
-    echo "group exists"
-else 
-    groupadd ${GROUPNAME}
-fi 
-if getent passwd $USERNAME; then
-    echo "group exists"
-else 
-    useradd -u ${USER_ID} -g ${GROUPNAME} -o ${USERNAME} 
-fi 
-
-id ${USERNAME} 
+groupmod --gid ${GROUP_ID} -n ${GROUPNAME} ubuntu
+useradd -g ${GROUPNAME} ${USERNAME} 
+usermod -u ${USER_ID} -g ${GROUPNAME} -o ${USERNAME} 
 
 if ! [ -d /app/data ]; then 
     mkdir data

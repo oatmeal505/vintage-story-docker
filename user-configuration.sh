@@ -1,11 +1,11 @@
 # 
-if id $GROUPNAME >/dev/null 2>&GROUPNAME; then
+if getent passwd $GROUPNAME; then
     echo "group exists"
 else 
     groupadd ${GROUPNAME}
 fi 
 
-if id $USERNAME >/dev/null 2>&USERNAME; then
+if getent passwd $USERNAME; then
     echo "group exists"
 else 
     useradd -u ${USER_ID} -g ${GROUPNAME} ${USERNAME} 

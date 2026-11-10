@@ -6,10 +6,10 @@ services:
       - "42420:42420"
     environment:
       # User configuration
-      - USERNAME=oatmeal # host machines user name 
+      - USERNAME=vintagestory # host machines user name 
       - USER_ID=1000 # host machines UID
       - GROUP_ID=1000 # host machines GID
-      - GROUPNAME=oatmeal # host machines group
+      - GROUPNAME=vintagestory # host machines group
 
       - WHITELIST=true
 
@@ -20,5 +20,5 @@ services:
       - UPDATE_CONFIRM="false"
     volumes:
       # 
-      - /home/oatmeal/Git-projects/vintage-story-docker/data:/app/data
-      - /home/oatmeal/Git-projects/vintage-story-docker/server:/app/server
+      - /host-machine/data:/app/data
+      - /host-machine/vintage-story-docker/server:/app/server

@@ -1,14 +1,15 @@
 # 
+deluser ubuntu
+
 if getent passwd $GROUPNAME; then
     echo "group exists"
 else 
     groupadd ${GROUPNAME}
 fi 
-
 if getent passwd $USERNAME; then
     echo "group exists"
 else 
-    useradd -u ${USER_ID} -g ${GROUPNAME} ${USERNAME} 
+    useradd -u ${USER_ID} -g ${GROUPNAME} -o ${USERNAME} 
 fi 
 
 id ${USERNAME} 
@@ -26,4 +27,4 @@ else
     chown -R --silent ${USERNAME}:${GROUPNAME} server
 fi
 
-su - ${USERNAME} "./entrypoint.sh"
+# su - ${USERNAME} "./entrypoint.sh"

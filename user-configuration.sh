@@ -27,4 +27,4 @@ fi
 chown -R ${USERNAME}:${GROUPNAME} data
 chown -R ${USERNAME}:${GROUPNAME} server
 
-su -p ${USERNAME} "./entrypoint.sh"
+su -T -c - ${USERNAME} "./entrypoint.sh"

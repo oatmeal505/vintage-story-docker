@@ -1,5 +1,6 @@
 # 
-deluser ubuntu
+getent passwd ubuntu
+deluser --system --quiet ubuntu ubuntu
 
 if getent passwd $GROUPNAME; then
     echo "group exists"

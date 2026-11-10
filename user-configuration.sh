@@ -3,11 +3,11 @@ groupmod --gid ${GROUP_ID} -n ${GROUPNAME} ubuntu
 useradd -g ${GROUPNAME} ${USERNAME} 
 usermod -u ${USER_ID} -g ${GROUPNAME} -o ${USERNAME} 
 
-if ! [ -d /app/data ]; then 
+if ! [ -d /home/vintagestory/data ]; then 
     mkdir data
     echo "data folder created" 
 fi
-if ! [ -d /app/server ]; then 
+if ! [ -d /home/vintagestory/server ]; then 
     mkdir server
     echo "server folder created" 
 fi

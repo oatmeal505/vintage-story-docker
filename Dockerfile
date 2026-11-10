@@ -26,7 +26,7 @@ ENV GROUPNAME=vintagestoryserver
 ENV USER_ID=1000
 ENV GROUP_ID=1000
 
-WORKDIR /app
+WORKDIR /home/vintagestory
 
 # default network ports
 EXPOSE ${PORT}/tcp

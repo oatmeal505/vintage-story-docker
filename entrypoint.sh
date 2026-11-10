@@ -17,7 +17,7 @@ if [ -e "server/VintagestoryServer.dll" ]; then
     else 
 
     echo "serverconfig.json not found"
-    dotnet server/VintagestoryServer.dll --dataPath /app/data &
+    dotnet server/VintagestoryServer.dll --dataPath /home/vintagestory/data &
     sleep 18
     kill %%
     sleep 3
@@ -56,7 +56,7 @@ rm server/vs_server_linux-x64_${VERSION}.tar.gz
     else 
 
     echo "serverconfig.json not found"
-    dotnet server/VintagestoryServer.dll --dataPath /app/data &
+    dotnet server/VintagestoryServer.dll --dataPath /home/vintagestory/data &
     sleep 18
     kill %%
     sleep 3
@@ -75,5 +75,5 @@ rm server/vs_server_linux-x64_${VERSION}.tar.gz
     fi
 fi
 
-dotnet server/VintagestoryServer.dll --dataPath /app/data
+dotnet server/VintagestoryServer.dll --dataPath /home/vintagestory/data
 

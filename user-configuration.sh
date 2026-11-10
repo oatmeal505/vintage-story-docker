@@ -1,7 +1,4 @@
 # 
-getent passwd ubuntu:1000
-userdel --force Ubuntu
-
 if getent passwd $GROUPNAME; then
     echo "group exists"
 else 
@@ -25,6 +22,8 @@ if ! [ -d /app/server ]; then
 fi
 
 chown -R ${USERNAME}:${GROUPNAME} data
+echo chown -R ${USERNAME}:${GROUPNAME} data
 chown -R ${USERNAME}:${GROUPNAME} server
+echo chown -R ${USERNAME}:${GROUPNAME} server
 
-su -T -c - ${USERNAME} "./entrypoint.sh"
+su -T -cs ${USERNAME} "./entrypoint.sh"

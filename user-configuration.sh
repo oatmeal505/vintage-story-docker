@@ -18,14 +18,13 @@ id ${USERNAME}
 if ! [ -d /app/data ]; then 
     mkdir data
     echo "data folder created" 
-else 
-    chown -R ${USERNAME}:${GROUPNAME} data
 fi
 if ! [ -d /app/server ]; then 
     mkdir server
     echo "server folder created" 
-else 
-    chown -R ${USERNAME}:${GROUPNAME} server
 fi
 
-su - ${USERNAME} "./entrypoint.sh"
+chown -R ${USERNAME}:${GROUPNAME} data
+chown -R ${USERNAME}:${GROUPNAME} server
+
+su -E ${USERNAME} "./entrypoint.sh"

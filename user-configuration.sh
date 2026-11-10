@@ -28,4 +28,4 @@ chown -R ${USERNAME}:${GROUPNAME} config_manipulator.py
 
 ls -l
 
-su -T -c ${USERNAME} "./entrypoint.sh"
+su -T -c "./entrypoint.sh" ${USERNAME} 

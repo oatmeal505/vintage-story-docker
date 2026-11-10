@@ -8,10 +8,7 @@ from pathlib import Path
 from deepdiff import DeepDiff
 from copy import deepcopy
 
-# access environment variable
-# print(os.environ)
-
-config_file_address = os.environ.get("USERNAME") + "/data/serverconfig.json"
+config_file_address = "data/serverconfig.json"
 
 try:
     with open(config_file_address, "r") as file: 
@@ -190,6 +187,11 @@ def main():
             filter_list_settings(item, data[item])
         elif item == "LastLaunchMods":
             filter_last_launch_mods(item, data[item], data)
+        elif item == "VERSION":
+            if os.environ.get("UPDATE_CONFIRM") == "true":
+                filter_settings(item, data)
+            else:
+                continue
         else:
             # print("found standard setting: ", item, " with the following type: ", type(data[item]), " that contains: ", data[item])
             # print("Found item: ", item, " that is: ", type(data[item]))

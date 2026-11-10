@@ -1,0 +1,25 @@
+services:
+  server:
+    image: ghcr.io/oatmeal505/vintage-story-docker:latest
+    container_name: vintage-story-server
+    ports:
+      - "42420:42420"
+    environment:
+      # User configuration
+      - USERNAME=${USER} # host machines user name 
+      - USER_ID=${UID} # host machines UID
+      - USER_ID=${GID} # host machines GID
+      - GROUPNAME="vintagestory" # host machines group
+
+      - VERSION=1.22.7
+      - WHITELIST=true
+
+      # for game version update/change alter the current version enviorment varriable to the new value
+      # in order for this to take effect you will need to set the new version and set UPDATE_CONFIRM to true
+      # NOTE: PLEASE BACK UP SERVER DATA BEFORE UPDATING
+      - VERSION=1.22.7
+      - UPDATE_CONFIRM="false"
+    volumes:
+      # 
+      - /host-machine/data:/app/data
+      - /host-machine/server:/app/server

@@ -11,7 +11,6 @@ services:
       - USER_ID=${GID} # host machines GID
       - GROUPNAME="vintagestory" # host machines group
 
-      - VERSION=1.22.7
       - WHITELIST=true
 
       # for game version update/change alter the current version enviorment varriable to the new value
